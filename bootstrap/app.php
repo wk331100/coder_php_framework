@@ -3,8 +3,8 @@ define('ROOT_PATH', __DIR__ . DIRECTORY_SEPARATOR . '..');
 define('APP_PATH', ROOT_PATH . DIRECTORY_SEPARATOR . 'app');
 
 //require __DIR__.'/../vendor/autoload.php';
-require __DIR__ . '/../system/autoload.php';
-require_once __DIR__ . '/../system/helpers.php';
+require __DIR__ . '/../System/autoload.php';
+require_once __DIR__ . '/../System/helpers.php';
 
 $app = new System\Application(dirname(__DIR__), ['web']);
 

@@ -9,21 +9,4 @@ class UserService{
         return UserModel::getInstance()->getList();
     }
 
-    public static function getInfo($uid){
-        return UserModel::getInstance()->getInfo($uid);
-    }
-
-    public static function create($data){
-
-    }
-
-    public static function update($data){
-
-    }
-
-    public static function delete($data){
-
-    }
-
-
 }

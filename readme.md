@@ -59,7 +59,8 @@ http://docs.getcoder.cn
 ```
 
 ### Edit `.env` file
-```php
+
+```
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
@@ -77,13 +78,20 @@ $app = require_once __DIR__.'/../bootstrap/app.php';
 $app->run();
 ```
 
+### DEfault Route
+In `routes/web.php` file
+```
+Route::get('/', 'IndexController@index');
+```
+
 ### Default Controller
+In `app/Http/Controllers/IndexController.php` file
 ```php
 <?php
 
 namespace App\Http\Controllers;
 
-use CPF\Response;
+use System\Response;
 
 class IndexController extends Controller {
 
@@ -95,6 +103,8 @@ class IndexController extends Controller {
 ```
 
 ### Example Service
+
+In `App/Services/UserService.php` file
 ```php
 <?php
 namespace App\Services;
@@ -111,12 +121,15 @@ class UserService{
 ```
 
 ### Example Model
+
+In `App/Models/UserModel.php` file
+
 ```php
 <?php
 
 namespace App\Models;
 
-use CPF\DB;
+use System\DB;
 
 class UserModel extends DB  {
 
