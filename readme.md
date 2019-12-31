@@ -138,7 +138,7 @@ class UserModel extends DB  {
 ```
 
 
-#### Output Results
+### Output Results
 ```
 {
     "code": 200,
