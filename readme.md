@@ -136,7 +136,7 @@ class UserModel extends DB  {
 ```
 
 
-#### Output results
+#### Output Results
 ```
 {
     "code": 200,
@@ -146,4 +146,4 @@ class UserModel extends DB  {
 ```
 
 ## License
-CPF is open source software under the [PHP License v3.01](http://www.php.net/license/3_01.txt)
+Coder PHP Framework is open source software under the [PHP License v3.01](http://www.php.net/license/3_01.txt)
