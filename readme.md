@@ -13,6 +13,8 @@ You Just need to download to your  PHP Server.
 - Use MCS structure, Controller(C),Model(M),Service(S)
 - Return By Json: {"code":"200", "msg":"success", "data"=[]}
 - Strong early warning mechanism (DB, Cache, Script, PHP Error)
+- Support ENV file
+- Support Middleware
 
 ## Install
 ### Requirements
