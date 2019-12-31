@@ -1,131 +1,149 @@
 # Coder - Simple PHP Framework
 <p>
 <a href="https://travis-ci.org/wk331100/coder_php_framework"><img src="https://travis-ci.org/wk331100/coder_php_framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
-Simple, High performance PHP framework written in C. 
+Simple, Faster, No Dependence, High Performance PHP framework. 
 
 ## Introduction
-API Services Framework (or simply Asf). It's has many micro-innovation and is a new generation of lightweight MVC framework.
+Coder PHP Framework (or simply CPF). It's very very easy to use,  Just Download and Running. No Dependence, No required Composer. 
+You Just need to download to your  PHP Server.
 
 ## Features
-- The class provided by the framework, loaded when the PHP process starts, and resident in memory.
-- Errno = 999, PHP fatal error interception.
-- Strong early warning mechanism (DB, Cache, Script, PHP Error).
-- Support for Logger Buffer Cache
-- Support for GPC methods, making it easier to use PHP global variables ($_GET, $_POST, $_COOKIE)
-- Support for configuration file resident memory
-- Support for faster, easier-to-operate cookie management
+- Use MCS structure, Controller(C),Model(M),Service(S)
+- Return By Json: {"code":"200", "msg":"success", "data"=[]}
+- Strong early warning mechanism (DB, Cache, Script, PHP Error)
 
 ## Install
 ### Requirements
 - PHP 7.0 +
-- GCC 4.4.0+ (Recommended GCC 4.8+)
+- PDO PHP Extension
+- Mbstring PHP Extension
 
 ### DownLoad
 ```
-git clone https://github.com/yulonghu/asf.git
+git clone https://github.com/wk331100/coder_php_framework.git
 ```
 
-### Compile for Linux/Unix/Mac
-
-Provide two installation methods.
-Select No.1, Use the following methods to install the extension:
-
-```bash
-cd asf/travis
-sudo ./install -i /path/to/phpize -c /path/to/php-config
-```
-
-Select No.2, PHP extension standard installation:
-
-```bash
-cd asf/asf
-/path/to/phpize
-./configure --with-php-config=/path/to/php-config
-make && make install
-```
-
-#### Add the extension to your php.ini
-```ini
-extension=asf.so
-```
-
-Restart the web server
 
 ### Documentation
 
-http://www.box3.cn/phpasf/index.html
+http://docs.getcoder.cn
 
 ## Get Started
 
-### Use tools to create a new project
-```
-/php-bin-path/php asf-src/tools/asf_project.php /to-path/project_name
-```
 #### Layout
 ```
-+ public
-  | - index.php
-+ config
-  | - config.php
-+ library
-+ modules
-    | - Bootstrap.php
-    | - Constants.php
-  + api
-    |+ services
-	   |- Index.php  // Default service
-    |+ logics
-    |+ daos
+- app
+    - Exception
+    - Http
+	- Controllers
+	- Middleware
+    - Libs
+    - Models
+    - Services
+- bootstrap
+    - app.php
+- config
+    - app.php
+    - database.php
+    - logging.php
+- public
+    - index.php
+- routes
+     web.php
+- storage
+
 ```
 
-### config/config.php
+### Edit `.env` file
 ```php
-<?php
-$configs = array(
-    'asf' => array(
-        'root_path' => APP_PATH . '/modules',
-    )
-);
-
-return $configs;
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=coder
+DB_USERNAME=coder
+DB_PASSWORD=123456
 ```
 
 ### public/index.php
 ```php
 <?php
-define('APP_PATH', dirname(__DIR__));
 
-$app = new Asf_Application(APP_PATH . '/config/config.php');
+$app = require_once __DIR__.'/../bootstrap/app.php';
+
 $app->run();
 ```
 
-### Default service
+### Default Controller
 ```php
 <?php
-class IndexService
-{
-    public function indexAction()
-    {
-        return 'Hello World';
+
+namespace App\Http\Controllers;
+
+use CPF\Response;
+
+class IndexController extends Controller {
+
+    public function index(){
+        return 'Hello World!';
     }
+
 }
 ```
 
-### Run in Nginx/Apache/Lighttpd
-http://www.your-domain.com
+### Example Service
+```php
+<?php
+namespace App\Services;
+
+use App\Models\UserModel;
+
+class UserService{
+
+    public static function getList(){
+        return UserModel::getInstance()->getList();
+    }
+
+}
+```
+
+### Example Model
+```php
+<?php
+
+namespace App\Models;
+
+use CPF\DB;
+
+class UserModel extends DB  {
+
+    protected $table = 'user';
+    private static $_instance;
+    protected $_pk = 'uid';
+
+
+    public static function getInstance() {
+        if (!self::$_instance) {
+            self::$_instance = new self();
+        }
+        return self::$_instance;
+    }
+
+
+}
+
+```
+
 
 #### Output results
 ```
 {
-    "errno": 0,
+    "code": 200,
+    "msg" ："Success"
     "data": "Hello World"
 }
 ```
 
 ## License
-Asf is open source software under the [PHP License v3.01](http://www.php.net/license/3_01.txt)
+CPF is open source software under the [PHP License v3.01](http://www.php.net/license/3_01.txt)
