@@ -10,7 +10,7 @@ Coder PHP Framework (or simply CPF). It's very very easy to use,  Just Download 
 You Just need to download to your  PHP Server.
 
 ## Features
-- Use MCS structure, Controller(C),Model(M),Service(S)
+- Use CSM structure, Controller(C),Model(M),Service(S)
 - Return By Json: {"code":"200", "msg":"success", "data"=[]}
 - Strong early warning mechanism (DB, Cache, Script, PHP Error)
 - Support ENV file
