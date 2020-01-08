@@ -14,6 +14,7 @@ use System\Route;
 
 Route::get('/', 'IndexController@index');
 Route::get('/home', 'HomeController@index');
+Route::post('/upload', 'HomeController@upload');
 
 Route::get('/user/list', 'UserController@index');
 Route::get('/user/info', 'UserController@info');

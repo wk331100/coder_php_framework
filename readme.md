@@ -6,11 +6,11 @@
 Simple, Faster, No Dependence, High Performance PHP framework. 
 
 ## Introduction
-Coder PHP Framework (or simply CPF). It's very very easy to use,  Just Download and Running. No Dependence, No required Composer. 
-You Just need to download to your  PHP Server.
+Coder PHP Framework (or simply CPF). It's very very easy to be used,  Just Download and Running. No Dependence, No required Composer. 
+You Just need to download and Run on your PHP Server.
 
 ## Features
-- Use CSM structure, Controller(C),Model(M),Service(S)
+- Use CSM structure, Controller(C),Service(S),Model(M)
 - Return By Json: {"code":"200", "msg":"success", "data"=[]}
 - Strong early warning mechanism (DB, Cache, Script, PHP Error)
 - Support ENV file

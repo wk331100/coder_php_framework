@@ -7,7 +7,7 @@ use System\Response;
 class IndexController extends Controller {
 
     public function index(){
-        return 'Hello World!';
+        return 'Hello Coder PHP Framework!';
     }
 
 }

@@ -16,6 +16,7 @@ class MessageCode {
 
 
 
+
     #  ============== 业务层自定义Message ================
     private static $message = [
 	    100                 => '未知错误',
@@ -29,6 +30,8 @@ class MessageCode {
 	    404                 => '非法请求',
         405                 => '图片格式错误',
 
+        1001                => '',
+
 
     ];
 
@@ -41,4 +44,7 @@ class MessageCode {
     public static function getMessage($code){
         return isset(self::$message[$code]) ? self::$message[$code] : self::$message[self::UNDEFINED_ERROR];
     }
+
+
+
 }
