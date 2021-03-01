@@ -3,6 +3,7 @@
 namespace System\DB;
 use PDO;
 use PDOException;
+
 class DBMysql{
     const CONNECT_MASTER    = 'master';
     const FROM              = 'FROM';
@@ -114,7 +115,7 @@ class DBMysql{
     }
 
     public function take($take){
-        $this->_table = $take;
+        $this->_take = $take;
         return $this;
     }
 
@@ -125,6 +126,7 @@ class DBMysql{
 
     public function select(array $columnArray = []){
         $this->_columns = implode(',', $columnArray);
+        var_dump($this->_columns);
         return $this;
     }
 
@@ -226,7 +228,7 @@ class DBMysql{
             $stmt->execute($values);
             return $this->_connector->lastInsertId();
         } else {
-            return $stmt->execute($values);;
+            return $stmt->execute($values);
         }
 
     }
