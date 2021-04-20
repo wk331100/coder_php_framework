@@ -18,5 +18,9 @@ class UserModel extends DB  {
         return self::$_instance;
     }
 
+    public function getUserList(){
+        return parent::getList(['uid','username']);
+    }
+
 
 }

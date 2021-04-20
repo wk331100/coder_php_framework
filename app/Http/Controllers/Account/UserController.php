@@ -11,13 +11,25 @@ class UserController extends Controller {
 
     public function index(Request $request){
         try {
-            $params = $request->all();
-            $userList = AccountService::getUserList($params);
+//            $params = $request->all();
+//            $userList = AccountService::getUserList($params);
+//            $data = [
+//                'params' => $params,
+//                'res' => $userList
+//            ];
             $data = [
-                'params' => $params,
-                'res' => $userList
+                "info" => [
+                    '10001' => [
+                        '303' => 1,
+                        '304' => 2,
+                    ],
+                    '10002' => [
+                        '305' => 3,
+                        '306' => 4,
+                    ]
+                ]
             ];
-            return Response::json($userList);
+            return Response::json($data);
         } catch (ServiceException $e) {
             return Response::error($e);
         }

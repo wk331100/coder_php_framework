@@ -9,8 +9,12 @@ class DB{
     protected $_pk = 'id';
 
 
-    public function getList(){
-        return DBMysql::table($this->table)->get();
+    public function getList($fields = []){
+        $DB = DBMysql::table($this->table);
+        if(!empty($fields)){
+            $DB = $DB->select($fields);
+        }
+        return $DB->get();
     }
 
     public function getInfo($id){
