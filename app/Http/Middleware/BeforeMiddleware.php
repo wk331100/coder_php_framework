@@ -12,5 +12,4 @@ class BeforeMiddleware{
         $request->setParam('request_id', strtoupper($requestId));
     }
 
-
 }

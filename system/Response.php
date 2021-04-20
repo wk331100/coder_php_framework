@@ -5,22 +5,25 @@ namespace System;
 use App\Libs\MessageCode;
 
 class Response{
-    const TYPE_HTML = 'html';
-    const TYPE_JSON = 'json';
 
-    protected static $contentType = 'text/html';
+    protected static $contentType = 'application/json';
     protected static $charset = 'utf-8';
-    protected static $code = 200;
+    protected static $header = [];
+
+    public static function header($headerArray = []){
+        if(!empty($headerArray)){
+            self::$header = $headerArray;
+        }
+    }
 
     public static function html($data){
-        self::setHeader(self::TYPE_HTML);
-        header('Content-Type:'.self::$contentType.';charset='.self::$charset);
+        self::$contentType =  'text/html';
+        self::setHeader();
         return $data;
     }
 
     public static function json($data){
-        self::setHeader(self::TYPE_JSON);
-        header('Content-Type:'.self::$contentType.';charset='.self::$charset);
+        self::setHeader();
         $data = ($data == false) ? self::failed($data) : self::success($data);
         return json_encode($data, JSON_UNESCAPED_SLASHES);
     }
@@ -39,6 +42,7 @@ class Response{
     }
 
     public static function failed($data = [], $extends = []) {
+        self::setHeader();
         $result = [
             'code' => MessageCode::FAILED,
             'msg' => MessageCode::getMessage(MessageCode::FAILED),
@@ -53,8 +57,7 @@ class Response{
     }
 
     public static function error(\Exception $e, $extends = []) {
-        self::setHeader(self::TYPE_JSON);
-        header('Content-Type:'.self::$contentType.';charset='.self::$charset);
+        self::setHeader();
         $results = [
             'code' => $e->getCode(),
             'msg' => $e->getMessage()
@@ -65,23 +68,17 @@ class Response{
         return $results;
     }
 
-
-    public static function setHeader($type){
-        switch ($type){
-            case 'html' : self::setHeaderHtml(); break;
-            case 'json' : self::setHeaderJson(); break;
-            default: self::setHeaderHtml(); break;
+    private static function setHeader(){
+        $headerStr = 'Content-Type:'.self::$contentType.';charset='.self::$charset;
+        if(!empty(self::$header)){
+            foreach (self::$header as $key => $value){
+                if(!in_array($key, ['Content-Type', 'charset']))
+                $headerStr .= ';' . $key . '=' . $value;
+            }
         }
-
+        header($headerStr);
     }
 
-    protected static function setHeaderHtml(){
-        return self::$contentType =  'text/html';
-    }
-
-    protected static function setHeaderJson(){
-        return self::$contentType =  'application/json';
-    }
 
 
 

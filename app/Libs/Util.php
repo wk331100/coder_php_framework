@@ -2,8 +2,6 @@
 
 namespace App\Libs;
 
-use Maatwebsite\Excel\Facades\Excel;
-
 class Util
 {
     /**

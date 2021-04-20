@@ -2,7 +2,9 @@
 namespace System;
 
 class Application{
+
     const BASE_NAMESPACE = '\App\Http\Controllers';
+    const SERVICE_NAMESPACE = '\App\Services';
 
     public $routeMiddleware = [];
     public $beforeMiddleware = [];
@@ -54,13 +56,6 @@ class Application{
         //执行加载
         $request = new Request($_REQUEST);
 
-        //执行前置中间件
-        if(!empty($this->beforeMiddleware)){
-            foreach ($this->beforeMiddleware as $middleware){
-                call_user_func($middleware . '::handle', $request);
-            }
-        }
-
         //执行路由中间件
         if(!empty($this->routeMiddleware) && !empty(Route::$routeMiddleware)){
             foreach (Route::$routeMiddleware as $middleware){
@@ -80,8 +75,10 @@ class Application{
 
         //执行控制器
         $fullNamespace = self::BASE_NAMESPACE . '\\' . Route::$routes[$urlPath]['controller'];
-        $controller = $fullNamespace . '::' . Route::$routes[$urlPath]['action'];
-        $response = call_user_func($controller, $request);
+
+        $action = Route::$routes[$urlPath]['action'];
+        $object = new $fullNamespace;
+        $response = $object->$action($request);
 
         //执行后置中间件
         if(!empty($this->afterMiddleware)){

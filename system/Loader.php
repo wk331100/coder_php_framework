@@ -5,7 +5,7 @@ class Loader
     /* 路径映射 */
     public static $vendorMap = array(
         'app' => __DIR__ . DIRECTORY_SEPARATOR . '../app',
-        'System' => __DIR__ ,
+        'system' => __DIR__ ,
     );
 
     /**

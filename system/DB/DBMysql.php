@@ -3,6 +3,7 @@
 namespace System\DB;
 use PDO;
 use PDOException;
+
 class DBMysql{
     const CONNECT_MASTER    = 'master';
     const FROM              = 'FROM';
@@ -51,7 +52,7 @@ class DBMysql{
     }
 
     public function conn($connect){
-        $config = require_once(ROOT_PATH . '/config/database.php');
+        $config = require(ROOT_PATH . '/config/database.php');
         $mysqlConfig = $config['connections']['mysql'][$connect];
         try {
             $this->_connector = new PDO("mysql:host={$mysqlConfig['host']};dbname={$mysqlConfig['database']}", $mysqlConfig['username'], $mysqlConfig['password']);
@@ -114,7 +115,7 @@ class DBMysql{
     }
 
     public function take($take){
-        $this->_table = $take;
+        $this->_take = $take;
         return $this;
     }
 
@@ -125,6 +126,7 @@ class DBMysql{
 
     public function select(array $columnArray = []){
         $this->_columns = implode(',', $columnArray);
+        var_dump($this->_columns);
         return $this;
     }
 
@@ -226,7 +228,7 @@ class DBMysql{
             $stmt->execute($values);
             return $this->_connector->lastInsertId();
         } else {
-            return $stmt->execute($values);;
+            return $stmt->execute($values);
         }
 
     }
